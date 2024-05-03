@@ -1,5 +1,6 @@
 package com.base.webSocket.config;
 
+import com.base.webSocket.dto.ChatMessage;
 import com.base.webSocket.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,19 +22,21 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     private final ChatService chatService;
 
 
-
-    // 목적 : 웹소켓 연결이 성공하면 호출되는 메소드
+    // 웹소켓 연결이 성공하면 호출
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        log.warn("CONNECT");
+        log.warn("WebSocket CONNECTED");
         super.afterConnectionEstablished(session);
     }
 
-    // 목적 : 웹소켓 클라이언트로부터 메시지가 도착하면 호출되는 메소드
+    // 웹소켓 클라이언트로부터 메시지가 도착하면 호출
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
         log.info("payload : {}", payload);
+
+        // 메시지를 JSON으로 변환
+         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
 
     }
 
@@ -50,7 +53,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        log.warn("DISCONNECT");
+        log.warn("WebSocket DISCONNECT");
         super.afterConnectionClosed(session, status);
     }
 
