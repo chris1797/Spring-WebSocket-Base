@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /chat
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/ChatTest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&verifyServerCertificate=false&useSSL=false
+    username: root
+    password: 0
+  jpa:
+    hibernate:
+#      ddl-auto: update
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # 테이블명, 컬럼명을 CamelCase로 변환
+    show-sql: true
