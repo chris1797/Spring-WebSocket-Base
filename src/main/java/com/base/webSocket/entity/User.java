@@ -14,9 +14,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId", nullable = false)
+    @Column(name = "userNo", nullable = false)
     @JdbcTypeCode(SqlTypes.BIGINT)
-    private Long userId;
+    private Long userNo;
 
     @Column(name = "userName", nullable = false)
     private String userName;
